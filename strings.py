@@ -40,7 +40,6 @@ def username_generator(first_name, last_name):
 # ends up as the first letter and so forth.
 # For example, if the username is AbeSimp, then the temporary password generated should be pAbeSim.
 
-
 def password_generator(user_name):
   password = ''
   for i in range(len(user_name)):
@@ -48,3 +47,18 @@ def password_generator(user_name):
   return password
 
 print(password_generator("apple"))
+
+# authors as a one big string
+authors = "Audre Lorde,Gabriela Mistral,Jean Toomer,An Qi,Walt Whitman,Shel Silverstein,Carmen Boullosa,Kamala Suraiyya,Langston Hughes,Adrienne Rich,Nikki Giovanni"
+
+author_names = authors.split(',')
+print(author_names)
+
+# a list called author_last_names that only contains
+# the last names of the poets in the provided string.
+
+author_last_names = []
+for name in author_names:
+  author_last_names.append(name.split()[-1])
+  
+print(author_last_names)
