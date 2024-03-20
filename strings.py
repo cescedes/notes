@@ -75,3 +75,8 @@ toomer_bio_fixed = toomer_bio.replace('Tomer', 'Toomer')
 god_wills_it_line_one = "The very earth will disown you"
 disown_placement = god_wills_it_line_one.find('disown')
 
+# including variables into strings with format()
+def poem_title_card(title, poet):
+  return "The poem \"{}\" is written by {}.".format(title, poet)
+
+
