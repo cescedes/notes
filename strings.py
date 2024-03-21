@@ -79,7 +79,6 @@ disown_placement = god_wills_it_line_one.find('disown')
 def poem_title_card(title, poet):
   return "The poem \"{}\" is written by {}.".format(title, poet)
 
-
 def poem_description(publishing_date, author, title, original_work):
   poem_desc = "The poem {title} by {author} was originally published in {original_work} in {publishing_date}.".format(publishing_date=publishing_date, author=author, title=title, original_work=original_work)
   return poem_desc
@@ -89,3 +88,38 @@ title = "My Beard",
 original_work = "Where the Sidewalk Ends",
 publishing_date = "1974")
 
+#######################################
+
+highlighted_poems = "Afterimages:Audre Lorde:1997,  The Shadow:William Carlos Williams:1915, Ecstasy:Gabriela Mistral:1925,   Georgia Dusk:Jean Toomer:1923,   Parting Before Daybreak:An Qi:2014, The Untold Want:Walt Whitman:1871, Mr. Grumpledump's Song:Shel Silverstein:2004, Angel Sound Mexico City:Carmen Boullosa:2013, In Love:Kamala Suraiyya:1965, Dream Variations:Langston Hughes:1994, Dreamwood:Adrienne Rich:1987"
+print(highlighted_poems)
+
+# split the string into separate items
+highlighted_poems_list = highlighted_poems.split(',')
+print(highlighted_poems_list)
+
+# strip from whitespace each item on the list
+highlighted_poems_stripped = []
+for poem in highlighted_poems_list:
+  highlighted_poems_stripped.append(poem.strip())
+print(highlighted_poems_stripped)
+
+# break up all the information for each poem into it’s own list, 
+# so we end up with a list of lists.
+highlighted_poems_details = []
+for poem in highlighted_poems_stripped:
+  highlighted_poems_details.append(poem.split(':'))
+print(highlighted_poems_details)
+
+# separate out all of the titles, the poets, and the publication dates into their own lists
+titles = []
+poets = []
+dates = []
+for poem in highlighted_poems_details:
+  titles.append(poem[0])
+  poets.append(poem[1])
+  dates.append(poem[2])
+
+# a for loop that uses .format() to print out the following string for each poem: The poem TITLE was published by POET in DATE.
+for i in range(len(titles)):
+  print("The poem {} was published by {} in {}.".format(titles[i], poets[i], dates[i]))
+  i+=1
