@@ -83,3 +83,14 @@ lessons = num_exercises.keys()
 print(lessons)
 #dict_keys(['functions', 'syntax', 'control flow', 'loops', 'lists', 'classes', 'dictionaries'])
 
+num_exercises = {"functions": 10, "syntax": 13, "control flow": 15, "loops": 22, "lists": 19, "classes": 18, "dictionaries": 18}
+#.values() method that returns a dict_values object
+total_exercises = 0
+for i in num_exercises.values():
+  total_exercises += i
+
+pct_women_in_occupation = {"CEO": 28, "Engineering Manager": 9, "Pharmacist": 58, "Physician": 40, "Lawyer": 37, "Aerospace Engineer": 9}
+# you can get both the keys and the values with the .items() method
+for key, value in pct_women_in_occupation.items():
+  print("Women make up " + str(value) + " percent of " + key + "s.")
+
