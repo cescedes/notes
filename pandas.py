@@ -85,3 +85,59 @@ emails = orders['email']
 frances_palmer = orders[(orders.first_name == 'Frances') & (orders.last_name == 'Palmer')]
 #Select all orders for shoe_type: clogs, boots, and ballet flats and save them to the variable comfy_shoes.
 comfy_shoes = orders[(orders.shoe_type == 'clogs') | (orders.shoe_type == 'boots') | (orders.shoe_type == 'ballet flats')]
+
+#####################
+
+df = pd.DataFrame([
+  [1, '3 inch screw', 0.5, 0.75],
+  [2, '2 inch nail', 0.10, 0.25],
+  [3, 'hammer', 3.00, 5.50],
+  [4, 'screwdriver', 2.50, 3.00]
+],
+  columns=['Product ID', 'Description', 'Cost to Manufacture', 'Price']
+)
+
+#adding a column
+df['Quantity'] = [100, 150, 50, 35]
+df['Sold in Bulk?'] = ['Yes', 'Yes', 'No', 'No']
+df['Is taxed?'] = 'Yes' #apply to all rows
+#Add a column to df called 'Margin', which is equal to the difference between the Price and the Cost to Manufacture.
+df['Margin'] = df.Price - df['Cost to Manufacture']
+
+#the apply function to apply a function to every value in a particular column.
+#this code overwrites the existing 'Name' columns by applying the function upper to every row in 'Name'.
+df['Name'] = df.Name.apply(str.upper)
+#Apply the function lower to all names in column 'Name' in df. Assign these new names to a new column of df called 'Lowercase Name'. 
+df['Lowercase Name'] = df.Name.apply(str.lower)
+
+#a lambda function get_last_name which takes a string with someone’s first and last name (i.e., John Smith), and returns just the last name (i.e., Smith).
+get_last_name = lambda name: name.split(' ')[-1]
+#Use the lambda function get_last_name to create a new column last_name with only the employees’ last name.
+df['last_name'] = df.name.apply(get_last_name)
+
+#We can also operate on multiple columns at once. 
+#If we use apply without specifying a single column and add the argument axis=1,
+#the input to our lambda function will be an entire row, not a column.
+#If an employee worked for more than 40 hours, she needs to be paid overtime (1.5 times the normal hourly wage).
+#Create a lambda function total_earned that accepts an input row with keys hours_worked and hourly_wage and uses an if statement to calculate the total wages earned.
+total_earned = lambda row: row['hourly_wage'] * row['hours_worked'] if row['hours_worked'] <= 40 else row['hourly_wage'] * 40 + row['hourly_wage'] * 1.5 * (row['hours_worked'] - 40)
+#Use the lambda function total_earned and apply to add a column total_earned to df with the total amount earned by each employee.
+df['total_earned'] = df.apply(total_earned, axis = 1)
+
+#renaming columns
+df = pd.DataFrame({
+    'name': ['John', 'Jane', 'Sue', 'Fred'],
+    'age': [23, 29, 21, 18]
+})
+df.columns = ['First Name', 'Age']
+
+#renaming columns. with rename method we can just change a single column name. it creates a new dataframe so we use inplace=True to overwrite.
+df.rename(columns={'name': 'movie_title'}, inplace=True)
+
+#######################
+
+#Add a new column called shoe_source, which is vegan if the materials is not leather and animal otherwise.
+orders['shoe_source'] = orders.shoe_material.apply(lambda x: 'vegan' if x != 'leather' else 'animal')
+#Using the columns last_name and gender create a column called salutation which contains Dear Mr. <last_name> for men and Dear Ms. <last_name> for women.
+orders['salutation'] = orders.apply(lambda row: 'Dear Mr. ' + row['last_name'] if row['gender'] == 'male' else 'Dear Ms. ' + row['last_name'], axis=1)
+
