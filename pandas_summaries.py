@@ -5,82 +5,63 @@ print(movies.head())
 
 # Print the summary statistics for all columns
 print(movies.describe(include='all'))
-
 # Save the mean to mean_budget
 mean_budget = movies.production_budget.mean()
 print(mean_budget)
-
 # Save the median to med_budget
 med_budget = movies.production_budget.median()
 print(med_budget)
-
 # Save the mode to mode_budget
 mode_budget = movies.production_budget.mode()
 print(mode_budget)
-
 # Save the trimmed mean to trmean_budget
 from scipy.stats import trim_mean
 trmean_budget = trim_mean(movies.production_budget, proportiontocut=0.2)  
 print(trmean_budget)
-
 # Save the range to range_budget
 range_budget = movies.production_budget.max() - movies.production_budget.min()
 print(range_budget)
-
 # Save the interquartile range to iqr_budget
 iqr_budget = movies.production_budget.quantile(0.75) - movies.production_budget.quantile(0.25)
 print(iqr_budget)
 #alternatively
 from scipy.stats import iqr
 iqr(movies.production_budget)
-
 # Save the variance to var_budget
 var_budget = movies.production_budget.var()
 print(var_budget)
-
 # Save the standard deviation to std_budget
 std_budget = movies.production_budget.std()
 print(std_budget)
-
 # Save the mean absolute deviation to mad_budget
 mad_budget = movies.production_budget.mad()
 
 ######################
-
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-movies = pd.read_csv('movies.csv')
 
 # Create a boxplot for movie budget 
 sns.boxplot(x='production_budget', data=movies)
 plt.show()
 plt.close()
-
 # Create a histogram for movie budget
 sns.histplot(x='production_budget', data=movies)
 plt.show()
 plt.close()
-
 # Save the counts to genre_counts
 genre_counts = movies.genre.value_counts()
-
 # Save the proportions to genre_props
 genre_props = movies.genre.value_counts() / len(movies.genre)
-
 # Create a bar chart for movie genre 
 sns.countplot(x='genre', data=movies)
 plt.show()
 plt.close()
-
 # Create a pie chart for movie genre
 movies.genre.value_counts().plot.pie()
 plt.show()
 plt.close()
 
-
 #############################################
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -126,3 +107,53 @@ plt.clf()
 # Create pie chart of Mjob
 students.Mjob.value_counts().plot.pie()
 plt.show()
+
+################################################
+
+#separate out scores for students who live in urban and rural locations:
+scores_urban = students.G3[students.address == 'U']
+scores_rural = students.G3[students.address == 'R']
+
+#calculate means for each group:
+scores_urban_mean = np.mean(scores_urban)
+scores_rural_mean = np.mean(scores_rural)
+#print mean scores:
+print('Mean score - students w/ urban address:')
+print(scores_urban_mean)
+print('Mean score - students w/ rural address:')
+print(scores_rural_mean)
+#calculate mean difference:
+mean_diff = scores_urban_mean - scores_rural_mean
+#print mean difference
+print('Mean difference:')
+print(mean_diff)
+
+#calculate medians for each group:
+scores_urban_median = np.median(scores_urban)
+scores_rural_median = np.median(scores_rural)
+#print median scores
+print('Median score - students w/ urban address:')
+print(scores_urban_median)
+print('Median score - students w/ rural address:')
+print(scores_rural_median)
+#calculate median difference
+median_diff = scores_urban_median - scores_rural_median
+#print median difference
+print('Median difference:')
+print(median_diff)
+
+#create the side-by-side boxplot here:
+sns.boxplot(data=students, x='address', y='G3')
+plt.show()
+
+#create the overlapping histograms here:
+plt.hist(scores_urban, color="red", label="Urban",normed=True, alpha=0.5)
+plt.hist(scores_rural, color="green", label="Rural", normed=True, alpha=0.5)
+plt.show()
+
+#to assess whether there is an association between students’ math score (G3) and their fathers’ job (Fjob)
+#create the side-by-side box-plot here:
+sns.boxplot(data = students, x = 'Fjob', y = 'G3')
+plt.show()
+
+
