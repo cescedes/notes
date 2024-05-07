@@ -157,3 +157,28 @@ sns.boxplot(data = students, x = 'Fjob', y = 'G3')
 plt.show()
 
 
+###########
+#price: monthly rental price in U.S.D.
+#type: type of housing (eg., 'apartment', 'house', 'condo', etc.)
+#sqfeet: housing area, in square feet
+#beds: number of beds
+#baths: number of baths
+#lat: latitude
+#long: longitude
+
+# create a scatter plot to see if there is an association between the number of bedrooms (beds) and the area (sqfeet) of a rental.
+plt.scatter(x=housing.beds, y=housing.sqfeet)
+plt.xlabel('Number of bedrooms')
+plt.ylabel('The area')
+plt.show()
+
+# calculate the covariance matrix for the sqfeet variable and the beds variable
+cov_mat_sqfeet_beds = np.cov(housing.sqfeet, housing.beds)
+print(cov_mat_sqfeet_beds)
+#output:
+#[[110669.     228.2]
+#[   228.2      0.7]]
+# store the covariance as cov_sqfeet_beds
+cov_sqfeet_beds = 228.2
+
+
