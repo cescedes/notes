@@ -181,4 +181,11 @@ print(cov_mat_sqfeet_beds)
 # store the covariance as cov_sqfeet_beds
 cov_sqfeet_beds = 228.2
 
+from scipy.stats import pearsonr
+# Pearson Correlation
+# calculate corr_sqfeet_beds and print it out:
+corr_sqfeet_beds, p = pearsonr(housing.sqfeet, housing.beds)
+print(corr_sqfeet_beds)
+
+
 
