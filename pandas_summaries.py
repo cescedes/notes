@@ -104,7 +104,7 @@ print(students.Mjob.value_counts(normalize=True))
 sns.countplot(x='Mjob', data=students)
 plt.show()
 plt.clf()
-# Create pie chart of Mjob
+# Create Pie Chart of Mjob
 students.Mjob.value_counts().plot.pie()
 plt.show()
 
@@ -114,45 +114,41 @@ plt.show()
 scores_urban = students.G3[students.address == 'U']
 scores_rural = students.G3[students.address == 'R']
 
-#calculate means for each group:
+#calculate Means for each group:
 scores_urban_mean = np.mean(scores_urban)
 scores_rural_mean = np.mean(scores_rural)
-#print mean scores:
 print('Mean score - students w/ urban address:')
 print(scores_urban_mean)
 print('Mean score - students w/ rural address:')
 print(scores_rural_mean)
-#calculate mean difference:
+#calculate Mean Difference:
 mean_diff = scores_urban_mean - scores_rural_mean
-#print mean difference
 print('Mean difference:')
 print(mean_diff)
 
-#calculate medians for each group:
+#calculate Medians for each group:
 scores_urban_median = np.median(scores_urban)
 scores_rural_median = np.median(scores_rural)
-#print median scores
 print('Median score - students w/ urban address:')
 print(scores_urban_median)
 print('Median score - students w/ rural address:')
 print(scores_rural_median)
-#calculate median difference
+#calculate Median Difference
 median_diff = scores_urban_median - scores_rural_median
-#print median difference
 print('Median difference:')
 print(median_diff)
 
-#create the side-by-side boxplot here:
+#create the side-by-side Boxplot here:
 sns.boxplot(data=students, x='address', y='G3')
 plt.show()
 
-#create the overlapping histograms here:
+#create the overlapping Histograms here:
 plt.hist(scores_urban, color="red", label="Urban",normed=True, alpha=0.5)
 plt.hist(scores_rural, color="green", label="Rural", normed=True, alpha=0.5)
 plt.show()
 
 #to assess whether there is an association between students’ math score (G3) and their fathers’ job (Fjob)
-#create the side-by-side box-plot here:
+#create the side-by-side Boxplot here:
 sns.boxplot(data = students, x = 'Fjob', y = 'G3')
 plt.show()
 
@@ -166,13 +162,13 @@ plt.show()
 #lat: latitude
 #long: longitude
 
-# create a scatter plot to see if there is an association between the number of bedrooms (beds) and the area (sqfeet) of a rental.
+# create a Scatter Plot to see if there is an association between the number of bedrooms (beds) and the area (sqfeet) of a rental.
 plt.scatter(x=housing.beds, y=housing.sqfeet)
 plt.xlabel('Number of bedrooms')
 plt.ylabel('The area')
 plt.show()
 
-# calculate the covariance matrix for the sqfeet variable and the beds variable
+# calculate the Covariance Matrix for the sqfeet variable and the beds variable
 cov_mat_sqfeet_beds = np.cov(housing.sqfeet, housing.beds)
 print(cov_mat_sqfeet_beds)
 #output:
@@ -188,4 +184,32 @@ corr_sqfeet_beds, p = pearsonr(housing.sqfeet, housing.beds)
 print(corr_sqfeet_beds)
 
 
+##############################################
+# Contingency Table
+npi = pd.read_csv("npi_sample.csv")
+# using the crosstab function from pandas, create a contingency table for the two variables 'special' and 'authority and store the table
+special_authority_freq = pd.crosstab(npi.special, npi.authority)
+
+# convert those frequencies to proportions, save the table of proportions:
+special_authority_prop = special_authority_freq/len(npi)
+
+#The proportion of respondents in each category of a single question is called a marginal proportion. 
+
+# calculate authority_marginals
+authority_marginals = special_authority_prop.sum(axis=0)
+# calculate special_marginals
+special_marginals = special_authority_prop.sum(axis=1)
+
+#Expected Contingency Tables
+#In order to understand whether these questions are associated, 
+#we can use the marginal proportions to create a contingency table of expected proportions
+#if there were no association between these variables.
+from scipy.stats import chi2_contingency
+# calculate the expected contingency table if there's no association and save it as expected
+chi2, pval, dof, expected = chi2_contingency(special_authority_freq)
+print(np.round(expected))
+#The more that the expected and observed tables differ, the more sure we can be that the variables are associated.
+
+# calculate the chi squared statistic and save it as chi2:
+chi2, pval, dof, expected = chi2_contingency(special_authority_freq)
 
