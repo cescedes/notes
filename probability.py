@@ -109,3 +109,33 @@ print(1 - stats.norm.cdf(24, 20, 3))
 # temperature being between 21*C and 25*C
   # x = 24, loc = 20, scale = 3
 print(stats.norm.cdf(25, 20, 3) - stats.norm.cdf(21, 20, 3))
+
+
+############################################
+
+# POISSON DIST 
+
+# PMF
+
+#the average number of calls in our call center between 9am and 10am to be 15 calls.
+#What is the probability that we would see exactly 15 calls in that time frame?
+prob_15 = stats.poisson.pmf(15, 15) 
+# the probability we would get between 7 and 9 calls, the average is 15
+prob_7_to_9 = stats.poisson.pmf(9, 15) + stats.poisson.pmf(8, 15) + stats.poisson.pmf(7, 15)
+
+# CDF
+
+# what is the probability of observing more than 20 calls?
+prob_more_than_20 = 1 - stats.poisson.cdf(20, 15)
+# the probability of observing between 17 to 21 calls when the expected number of calls is 15
+prob_17_to_21 = stats.poisson.cdf(21, 15) - stats.poisson.cdf(16, 15)
+
+# generate random poisson sample
+from histogram_function import histogram_function
+# lambda = 15, 1000 random draws 
+rand_vars = stats.poisson.rvs(15, size = 1000)
+rvs.mean(rand_vars)
+#histogram_function() takes a list of random variables and plots them to a histogram
+histogram_function(rand_vars)
+
+
