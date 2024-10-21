@@ -138,4 +138,24 @@ rvs.mean(rand_vars)
 #histogram_function() takes a list of random variables and plots them to a histogram
 histogram_function(rand_vars)
 
+########################################
+
+import scipy.stats as stats
+
+## You work at ambulance dispatch where the number of calls that come in daily follows the Poisson distribution with lambda equal to 9. 
+#There’s a rule that a team can go on no more than 12 calls a day. But how often could this happen?
+calls = 1 - stats.poisson.cdf(12, 9)
+
+## Let’s say that you have to call in a backup team if you have 10 or more calls in a given day. 
+#But you don’t want to have to call in a backup team unless they really will be needed.
+#But what is the probability that they will be called and not needed?
+false_backup = stats.poisson.cdf(12, 9) - stats.poisson.cdf(9, 9)
+
+## A certain tennis star has a first-serve rate of 62%. Let’s say they serve 80 times in a given match.
+#What is the expected value of the number of serves they make?
+expected_serves = 80*0.62
+
+## At the same first-serve rate, what is the variance of this player’s first-serves?
+variance_serves = 80*0.62*(1-0.62)
+
 
