@@ -83,3 +83,13 @@ print(false_positives/1000) #Output: 0.0512
 #Alternative hypothesis: More than 10% of subscribers will read an article
 #Out of a sample of 100 subscribers who saw an article, 15 people read it. Based on this sample, suppose we run a binomial hypothesis test and calculate a p-value of 0.04.
 #===If each subscriber has a 10% chance of reading the article, then there is a 4% chance that, among a random sample of 100 subscribers, 15 or more will read the article.
+
+
+#Out of a sample of 100 subscribers who saw an article, 15 people read it. Suppose we are running a hypothesis test for this sample with the following null and alternative hypotheses:
+#Null hypothesis: 10% of subscribers who see an article will read it
+#Alternative hypothesis: More than 10% of subscribers who see an article will read it
+#Fill in the code to run a binomial hypothesis test:
+from scipy.stats import binom_test
+p_value_2sided = binom_test(x = 15, n = 100, p = 0.1, alternative = 'greater')
+
+#When running more than one hypothesis test with a particular significance threshold, the probability of making at least one type I error is higher than sig threshold
