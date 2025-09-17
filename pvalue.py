@@ -77,3 +77,9 @@ print(false_positives/1000) #Output: 0.0512
 
 
 #*Both the Type I error rate and significance threshold represent the probability of rejecting the null hypothesis when it is true.
+
+#Suppose we are running a hypothesis test with the following null and alternative hypotheses:
+#Null hypothesis: 10% of subscribers will read an article
+#Alternative hypothesis: More than 10% of subscribers will read an article
+#Out of a sample of 100 subscribers who saw an article, 15 people read it. Based on this sample, suppose we run a binomial hypothesis test and calculate a p-value of 0.04. Fill in the blanks to indicate the correct interpretation of this p-value:
+#===If each subscriber has a 10% chance of reading the article, then there is a 4% chance that, among a random sample of 100 subscribers, 15 or more will read the article.
