@@ -1,4 +1,4 @@
-In order to turn a p-value, which is a probability, into a yes or no answer, data scientists often use a pre-set significance threshold. 
+#In order to turn a p-value, which is a probability, into a yes or no answer, data scientists often use a pre-set significance threshold. 
 #The significance threshold can be any number between 0 and 1, but a common choice is 0.05. 
 #P-values that are less than this threshold are considered “significant”, while larger p-values are considered “not significant”.
 # P-Value for first Hypothesis Test
